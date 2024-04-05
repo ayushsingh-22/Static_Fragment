@@ -10,6 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F45E53"
+        android:gravity="center"
+        android:text="@string/frag_1"
+        android:textSize="100sp"
+        android:textColor="#fff"
+        android:textStyle="bold"
         android:id="@+id/txt1"/>
 
 </FrameLayout>

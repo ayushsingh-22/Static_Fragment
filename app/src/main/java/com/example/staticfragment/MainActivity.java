@@ -9,57 +9,57 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity
+{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        System.out.println("ayush1");
-
-        Button btn1,btn2,btn3;
+        Button btn1, btn2, btn3;
 
         btn1 = findViewById(R.id.btn1);
         btn2 = findViewById(R.id.btn2);
         btn3 = findViewById(R.id.btn3);
 
         creatfn(new f2(),0);
-        System.out.println("ayush2");
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                creatfn(new f1(),1);
-                System.out.println("ayush 3");
+                creatfn(new f1(),0);
             }
         });
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                creatfn(new f2(),2);
-                System.out.println("ayush 4");
+                creatfn(new f2(),1);
             }
         });
 
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               creatfn(new f3(),3);
-                System.out.println("ayush 5");
+                creatfn(new f3(),0);
             }
         });
-
-        System.out.println("ayush 6");
-
     }
 
-    public void creatfn(Fragment fragment, int flag)
-    {
+    public void creatfn(Fragment fragment, int flag) {
         FragmentManager fragManager = getSupportFragmentManager();
         FragmentTransaction ft = fragManager.beginTransaction();
-        ft.add(R.id.frame,fragment);
+
+        if(flag==0) {
+            ft.replace(R.id.frame, fragment);
+            fragManager.popBackStack(ROOT_FRAGMENT_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            ft.addToBackStack(ROOT_FRAGMENT_TAG);
+        }
+        else{
+            ft.replace(R.id.frame, fragment);
+            ft.addToBackStack(null);
+        }
         ft.commit();
     }
+    private static final String ROOT_FRAGMENT_TAG = "root_fragment";
 }
